@@ -12,6 +12,8 @@ function App() {
       <h1>Primer Projecto:</h1>
       <Formulario />
       <Contador />
+      <Temperatura />
+      <Listado />
     </div>
   );
 }
