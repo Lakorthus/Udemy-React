@@ -42,8 +42,8 @@ const ListadoNombres = () => {
   };
 
   return (
-    <div>
-      <h2>Aplicacion de Crud Basica</h2>
+      <div>
+        <h2>Aplicacion de Crud Basica</h2>
       <div className="row">
         <div className="col">
           <h2>Listado de Nombres</h2>
