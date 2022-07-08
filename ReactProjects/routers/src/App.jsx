@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 const App = () => {
   return (
     <Router>
+      <Link to={'/inicio'}>Inicio</Link>
+      <Link to={'/'}>Base</Link>
+
       <Routes>
         <Route path="/inicio">
           <Route index element={<Inicio />} />
