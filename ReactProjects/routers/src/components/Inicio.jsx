@@ -1,15 +1,14 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from "react";
+import { useParams } from "react-router-dom";
 
 const Inicio = () => {
-
-  const {nombre} = useParams()
+  const { nombre } = useParams();
   return (
     <div>
-        <h1>Pagina de Inicio</h1>
-        {nombre}
+      <h1>Pagina de Inicio</h1>
+      {nombre}
     </div>
-  )
-}
+  );
+};
 
-export default Inicio
+export default Inicio;
