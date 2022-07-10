@@ -5,22 +5,39 @@ import { auth } from "../firebase-cofing";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [msgerror, setMsgError] = useState(null);
 
-  const RegistrarUsuario = (e) =>{
-    e.preventDefault()
-    try{
-       auth.createUserWithEmailAndPassword(email,pass)
-       alert('Usuario registrado')
-    }catch (e){
-     console.log(e)
+  const RegistrarUsuario = (e) => {
+    e.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(email, pass)
+      .then((r) => alert("Usuario registrado"))
+      .catch((e) => {
+        if (e.code == "auth/invalid-email") {
+          setMsgError("Formato Email incorrecto");
+        }
+        if (e.code == "auth/weak-password") {
+          setMsgError("Password debe tener 6 caracteres o mas");
+        }
+      });
+  };
 
-    }
+  const LoginUsuario = (e) => {
+    e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, pass)
+      .then((r) => console.log(r))
+      .catch((err) => {
+        if (err.code == "auth/wrong-password") {
+          setMsgError("Password Incorrecta");
+        }
+      });
   };
 
   return (
     <div className="row mt-5">
       <div className="col"></div>
-      <div className="col">
+      <div className="col d-grid">
         <form onSubmit={RegistrarUsuario} className="form-group d-grid">
           <input
             onChange={(e) => {
@@ -39,11 +56,21 @@ const Login = () => {
             type="password"
           />
           <input
-            className="btn btn-primary mt-4  "
+            className="btn btn-dark mt-4  "
             value={"Registrar Usuario"}
             type="submit"
           />
         </form>
+        <button onClick={LoginUsuario} className="btn btn-success mt-3">
+          Iniciar Sesion
+        </button>
+        {msgerror != null ? (
+          <div>
+            <p className="alert alert-danger" role="alert">{msgerror}</p>
+          </div>
+        ) : (
+          <span></span>
+        )}
       </div>
       <div className="col"></div>
     </div>
