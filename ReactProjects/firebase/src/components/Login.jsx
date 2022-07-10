@@ -1,8 +1,10 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-cofing";
+import {useNavigate} from 'react-router-dom'
 
 const Login = () => {
+  const historial = useNavigate()
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [msgerror, setMsgError] = useState(null);
@@ -11,7 +13,9 @@ const Login = () => {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, pass)
-      .then((r) => alert("Usuario registrado"))
+      .then(r =>{
+        historial('/')
+      })
       .catch((e) => {
         if (e.code == "auth/invalid-email") {
           setMsgError("Formato Email incorrecto");
@@ -26,7 +30,9 @@ const Login = () => {
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(email, pass)
-      .then((r) => console.log(r))
+      .then((r) => {
+        historial('/')
+      })
       .catch((err) => {
         if (err.code == "auth/wrong-password") {
           setMsgError("Password Incorrecta");

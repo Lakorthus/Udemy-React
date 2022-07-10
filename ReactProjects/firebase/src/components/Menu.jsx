@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-cofing";
 
 const Menu = () => {
+  const historial = useNavigate();
   const [usuario, setUsuario] = useState(null);
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -13,10 +14,11 @@ const Menu = () => {
     });
   }, []);
 
-  const cerrarSesion = () =>{
-    auth.signOut()
-    setUsuario(null)
-  }
+  const cerrarSesion = () => {
+    auth.signOut();
+    setUsuario(null);
+    historial("/");
+  };
 
   return (
     <div>
@@ -28,14 +30,22 @@ const Menu = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={"/admin"}>
-              Admin
-            </Link>
+            {!usuario ? (
+              <Link className="nav-link" to={"/admin"}>
+                Admin
+              </Link>
+            ) : (
+              <span></span>
+            )}
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={"/login"}>
-              Login
-            </Link>
+            {!usuario ? (
+              <Link className="nav-link" to={"/login"}>
+                Login
+              </Link>
+            ) : (
+              <span></span>
+            )}
           </li>
         </ul>
         {usuario ? (
