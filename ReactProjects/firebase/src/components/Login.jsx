@@ -1,37 +1,42 @@
-import React, {useState} from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
 import { auth } from "../firebase-cofing";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
 
-    const [email, setEmail] = useState ('')
-    const [pass, setPass] = useState ('')
+  const RegistrarUsuario = (e) =>{
+    e.preventDefault()
+    try{
+       auth.createUserWithEmailAndPassword(email,pass)
+       alert('Usuario registrado')
+    }catch (e){
+     console.log(e)
 
-    const registrarUsurio =(e)=>{
-        e.preventDefault()
-        try{
-            auth.createUserWithEmailAndPass(email,pass)
-            alert('Usuario Registrado')
-        }catch(e){
-            console.log(e)
-        }
-    }   
+    }
+  };
 
   return (
     <div className="row mt-5">
       <div className="col"></div>
       <div className="col">
-        <form className="form-group d-grid">
+        <form onSubmit={RegistrarUsuario} className="form-group d-grid">
           <input
-            onChange={(e)=>{setEmail(e.target.value)}}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             className="form-control"
             placeholder="Introduce el Email"
             type="email"
           />
           <input
-            onChange={(e)=>{setPass(e.target.value)}}
+            onChange={(e) => {
+              setPass(e.target.value);
+            }}
             className="form-control mt-2"
             placeholder="Introduce el Password"
-            type="text"
+            type="password"
           />
           <input
             className="btn btn-primary mt-4  "
