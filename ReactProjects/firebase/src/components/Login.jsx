@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase-cofing";
+import { auth } from "./firebase-config";
 import {useNavigate} from 'react-router-dom'
 
 const Login = () => {
