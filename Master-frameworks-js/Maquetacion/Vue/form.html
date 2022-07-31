@@ -7,43 +7,27 @@
 
     <link rel="stylesheet" type="text/css" href="./Assets/css/style.css" />
     <title>Maquetacion de Framworks JavaScript</title>
-
-    <script type="text/javascript">
-      window.addEventListener("load", function () {
-        const template = document.getElementById("article-template");
-
-        const articles = document.getElementById("articles");
-        for (let i = 1; i <= 5; i++) {
-          const clonado = template.cloneNode(true);
-          clonado.removeAttribute('id');
-          const h2 = clonado.getElementsByTagName('h2')[0];
-          h2.innerHTML = h2.textContent + ' '+ i;
-
-          articles.appendChild(clonado);
-        }
-      });
-    </script>
   </head>
   <body>
     <header id="header">
       <div class="center">
         <!-- Logo -->
         <div id="logo">
-          <img src="./Assets/Images/react.svg" class="app-logo" alt="Logo" />
-          <span id="brand"> <b>Curso</b>React </span>
+          <img src="./Assets/Images/vue.svg" class="app-logo" alt="Logo" />
+          <span id="brand"> <b>Curso</b>Vue </span>
         </div>
 
         <!-- Menu -->
-        <nav id="menu">
+         <nav id="menu">
           <ul>
             <li>
-              <a href="#">Inicio</a>
+              <a href="index.html">Inicio</a>
             </li>
             <li>
-              <a href="#">Blog</a>
+              <a href="blog.html">Blog</a>
             </li>
             <li>
-              <a href="#">Formulario</a>
+              <a href="form.html">Formulario</a>
             </li>
             <li>
               <a href="#">Pagina1</a>
@@ -58,32 +42,33 @@
       </div>
     </header>
 
-    <div id="slider" class="slider-big">
-      <h1>Bienvenido al master en Frameworks para JavaScript</h1>
-      <a href="#" class="btn-white">Ir al blog</a>
-    </div>
-
     <div class="center">
       <section id="content">
-        <h2 class="sub-header">Ultimos articulos</h2>
-
-        <!-- Listado articulos -->
-        <div id="articles">
-          <article class="article-item" id="article-template">
-            <div class="image-wrap">
-              <img
-                src="https://assets.epuzzle.info/puzzle/020/781/original.jpg"
-                alt="Paisaje"
-              />
+        
+        <h1 class="sub-header">Formulario</h1>
+        <form class="mid-form">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre">
             </div>
-            <h2>Articulo de Prueba</h2>
-            <span class="date"> Hace 5 minutos </span>
-            <a href="#"><b>Leer mas</b></a>
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido">
+            </div>
+            <div class="form-group">
+                <label for="bio">Biografia</label>
+                <textarea name="bio"></textarea>
+            </div>
+            <div class="form-group radio-buttom">
+                <input type="radio"  name="genero" value="hombre"/>Hombre
+                <input type="radio"  name="genero" value="mujer"/>Mujer
+                <input type="radio"  name="genero" value="otro"/>Otro
+            </div>
             <div class="clearfix"></div>
 
-          </article>
-          <!-- Añadir articulos via JS -->
-        </div>
+            <input type="submit" value="Enviar" class="btn btn-success">
+        </form>
+
       </section>
 
       <aside id="sidebar">
