@@ -1,10 +1,9 @@
 // Diferentes metodos y rutas relacionadas con nuestra API
 "use strict";
 
-const { query } = require("express");
 var validator = require("validator");
-const { default: isTaxID } = require("validator/lib/isTaxID");
-const article = require("../models/article");
+var fs = require("fs");
+var path = require("path");
 var Article = require("../models/article");
 
 var controller = {
@@ -178,13 +177,144 @@ var controller = {
       });
     }
   },
-  
-  delete: (req, res) =>{
-    return res.status(200).send({
+
+  delete: (req, res) => {
+    // Recoger el id de la url
+    var articleId = req.params.id;
+
+    // Find and delete
+    Article.findOneAndDelete({ _id: articleId }, (err, articleRemoved) => {
+      if (err) {
+        return res.status(500).send({
+          status: "error",
+          message: "Error al borrar",
+        });
+      }
+      if (!articleRemoved) {
+        return res.status(404).send({
+          status: "error",
+          message: "No se ha borrado articulo, posiblemente no existe",
+        });
+      }
+      return res.status(200).send({
+        status: "success",
+        article: articleRemoved,
+      });
+    });
+  },
+  upload: (req, res) => {
+    // Configurar el modulo connect multiparty router/article.js
+
+    // Recoger el fichero de la peticion
+    var file_name = "Imagen no subida";
+
+    if (!req.files) {
+      return res.status(404).send({
         status: "error",
-        message: "Faltan datos por enviar",
-      }); 
-  }
+        message: file_name,
+      });
+    }
+    // Conseguir el nombre y la ext del archivo
+    var file_path = req.files.file0.path;
+    var file_split = file_path.split("/");
+
+    // * ADVERTENCIA * EN WINDOWS
+    // var file_split = file_path.split('\\');
+
+    // Nombre del archivo
+    var file_name = file_split[2];
+
+    // Extencion del fichero
+    var extension_split = file_name.split(".");
+    var file_ext = extension_split[1];
+
+    // Comprobar la extension, solo imagenes, si no es valida borrar fichero
+    if (
+      file_ext != "png" &&
+      file_ext != "jpg" &&
+      file_ext != "jpeg" &&
+      file_ext != "gif"
+    ) {
+      // Borrar achivo subido
+      fs.unlink(file_path, (err) => {
+        return res.status(200).send({
+          status: "error",
+          message: "La ext de la imagen no es valida",
+        });
+      });
+    } else {
+      // Sacando id de url
+      var articleId = req.params.id;
+      // Si todo es valido buscar el articulo, asignarle el nombre de la imagen y actualizarlo
+      Article.findOneAndUpdate(
+        { _id: articleId },
+        { image: file_name },
+        { new: true },
+        (err, articleUpdated) => {
+          if (err || !articleUpdated) {
+            return res.status(200).send({
+              status: "error",
+              message: "Error al guardar la imagen de articulo",
+            });
+          } else {
+            return res.status(200).send({
+              status: "success",
+              article: articleUpdated,
+            });
+          }
+        }
+      );
+    }
+  },
+  getImage: (req, res) => {
+    //obtener el fichero que se pide por URL
+    let file = req.params.image;
+    let path_file = "./upload/articles/" + file;
+
+    // comprobar si el archivo existe
+    fs.access(path_file, fs.constants.F_OK, (err) => {
+      if (err) {
+        return res.status(404).send({
+          status: "error",
+          message: "La imagen no existe !!!",
+        });
+      } else {
+        //devolvemos el fichero, para incrustarlo en etiquetas de imagen
+        return res.sendFile(path.resolve(path_file));
+      }
+    });
+  },
+  search: (req, res) => {
+    // Sacar el string a buscar
+    var searchString = req.params.search;
+
+    // Find or
+    Article.find({
+      $or: [
+        { title: { $regex: searchString, $options: "i" } },
+        { content: { $regex: searchString, $options: "i" } },
+      ],
+    })
+      .sort([["date", "descending"]])
+      .exec((err, articles) => {
+        if (err) {
+          return res.status(500).send({
+            status: "error",
+            message: "Error en la peticion",
+          });
+        } 
+        if(!articles || articles.length <= 0) {
+          return res.status(404).send({
+            status: "error",
+            message: "No hay articulos para mostrar",
+          });
+        }
+        return res.status(200).send({
+          status: "success",
+          articles,
+        });
+      });
+  },
 };
 // End controller
 
