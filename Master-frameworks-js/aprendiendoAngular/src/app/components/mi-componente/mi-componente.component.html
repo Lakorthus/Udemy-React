@@ -1,8 +1,13 @@
 
 <hr>
-<hr>
-<hr>
 <h1>{{this.titulo}}</h1>
 <p>{{this.comentario}}</p>
 <p>{{this.year}}</p>
 <hr>
+
+<button (click)="ocultarPeliculas()">Ocultar peliculas</button>
+<div *ngIf="mostrarPeliculas">
+    <peliculas></peliculas>
+</div>
+
+<pruebas></pruebas>
