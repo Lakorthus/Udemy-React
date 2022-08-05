@@ -1,7 +1,13 @@
-<div style="text-align: center;">
-  <h1>
-    Estamos {{title}}!
-  </h1>
+<app-header></app-header>
+<app-slider></app-slider>
+
+<div class="center">
+  <section id="content">
+    <!-- directiva de angular para cargar las rutas -->
+    <router-outlet></router-outlet> 
+    
+  </section>
+  <app-sidebar></app-sidebar>
 </div>
-<hr>
-<mi-componente></mi-componente>
+<div class="clearfix"></div>
+<app-footer></app-footer>
