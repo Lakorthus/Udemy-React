@@ -10,19 +10,19 @@
       <nav id="menu">
         <ul>
           <li>
-            <a href="index.html">Inicio</a>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']">Inicio</a>
           </li>
           <li>
-            <a href="blog.html">Blog</a>
+            <a [routerLink]="['/blog']" [routerLinkActive]="['active']">Blog</a>
           </li>
           <li>
-            <a href="form.html">Formulario</a>
+            <a [routerLink]="['/formulario']" [routerLinkActive]="['active']">Formulario</a>
           </li>
           <li>
-            <a href="#">Pagina1</a>
+            <a [routerLink]="['/peliculas']" [routerLinkActive]="['active']">Peliculas</a>
           </li>
           <li>
-            <a href="#">Pagina2</a>
+            <a [routerLink]="['/pagina-de-pruebas']" [routerLinkActive]="['active']">Prueba</a>
           </li>
         </ul>
       </nav>

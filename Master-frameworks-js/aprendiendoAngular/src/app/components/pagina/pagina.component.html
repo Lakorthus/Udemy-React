@@ -1,1 +1,9 @@
-<p>pagina works!</p>
+<h2 class="sub-header">Peliculas</h2>
+
+<div *ngIf="nombre && apellidos">
+  <p>El nombre es: {{ nombre }}</p>
+  <p>El apellido es: {{ apellidos }}</p>
+</div>
+<div *ngIf="!nombre && !apellidos">
+  <p>No hay nombre con apellidos por mostrar</p>
+</div>
