@@ -1,9 +1,16 @@
-<h2 class="sub-header">Peliculas</h2>
+<h2 class="sub-header">Pagina de pruebas</h2>
 
-<div *ngIf="nombre && apellidos">
+<div *ngIf="nombre && apellidos;then siHayParametros else noHayParametros">
+  
+</div>
+
+<ng-template #siHayParametros>
   <p>El nombre es: {{ nombre }}</p>
   <p>El apellido es: {{ apellidos }}</p>
-</div>
-<div *ngIf="!nombre && !apellidos">
+</ng-template>
+<ng-template #noHayParametros>
   <p>No hay nombre con apellidos por mostrar</p>
-</div>
+</ng-template>
+
+<button (click)="redireccion()">Ponme nombre y apellidos</button>
+<hr>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormularioComponent } from '../formulario/formulario.component';
 
 @Component({
   selector: 'app-pagina',
@@ -23,6 +24,10 @@ export class PaginaComponent implements OnInit {
       this.nombre = params['nombre'];
       this.apellidos = params['apellidos'];
     });
+  }
+
+  redireccion(){
+    this._router.navigate(['/pagina-de-pruebas','Julio','Velezmoro']);
   }
 
 }

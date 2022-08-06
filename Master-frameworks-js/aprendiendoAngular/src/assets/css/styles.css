@@ -86,6 +86,23 @@ a {
   font-weight: medium;
 }
 
+.year-green{
+  display: block;
+  background-color: green;
+  color: #eee;
+  padding: 5px;;
+  width: 121px;
+  text-align: center;
+}
+.year-red{
+  display: block;
+  background-color: red;
+  color: #eee;
+  padding: 5px;;
+  width: 121px;
+  text-align: center;
+}
+
 #slider {
   /* Gradient Css from css gradient generator */
   background: rgb(171, 18, 21);
