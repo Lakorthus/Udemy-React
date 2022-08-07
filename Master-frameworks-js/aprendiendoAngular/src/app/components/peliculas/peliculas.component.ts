@@ -8,6 +8,7 @@ import { Pelicula } from '../models/pelicula';
 export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   public titulo: string;
   public peliculas: Pelicula[];
+  public favorita!: Pelicula;
 
   constructor() {
     this.titulo = 'Peliculas funciona';
@@ -24,7 +25,7 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNyfbWV_X1cmcVAx-MzZd_Lgkv3lzA5XyZnA&usqp=CAU'
       ),
       new Pelicula(
-        'Sperman',
+        'Superman',
         2018,
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgWCsNUhGxi0Lg1e_uShhRhIHRYuhUjYJMhg&usqp=CAU'
       ),
@@ -66,5 +67,9 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('El componente se va a eliminar');
+  }
+
+  mostrarFavorita(event:any){
+    this.favorita = event.pelicula
   }
 }
