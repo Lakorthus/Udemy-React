@@ -9,14 +9,15 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   public titulo: string;
   public peliculas: Pelicula[];
   public favorita!: Pelicula;
+  public fecha!: any;
 
   constructor() {
     this.titulo = 'Peliculas funciona';
-
+    
     this.peliculas = [
       new Pelicula(
         'Spiderman 4',
-        2022,
+        2021,
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Ee-gTAKvTR3QIy5yO91FEh8r6mFL82Efl9NeKr_SJ_sHaHoLUdBr9mPpXQSW_kAW8FY&usqp=CAU'
       ),
       new Pelicula(
@@ -50,6 +51,7 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
 
       // },
     ];
+    this.fecha = new Date();
   }
 
   ngOnInit(): void {
