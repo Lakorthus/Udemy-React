@@ -1,13 +1,7 @@
 <app-header></app-header>
-<app-slider></app-slider>
+<!-- <app-slider [nombre]="homeText"> </app-slider> -->
 
-<div class="center">
-  <section id="content">
-    <!-- directiva de angular para cargar las rutas -->
-    <router-outlet></router-outlet> 
-    
-  </section>
-  <app-sidebar></app-sidebar>
-</div>
+<router-outlet></router-outlet>
+
 <div class="clearfix"></div>
 <app-footer></app-footer>

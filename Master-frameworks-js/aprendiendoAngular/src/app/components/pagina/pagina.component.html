@@ -1,17 +1,26 @@
-<h2 class="sub-header">Pagina de pruebas</h2>
 
-<div
-  *ngIf="nombre && apellidos; then siHayParametros; else noHayParametros"
-></div>
+<app-slider [nombre]="'Pruebas'"></app-slider>
 
-<ng-template #siHayParametros>
-  <p>El nombre es: {{ nombre }}</p>
-  <p>El apellido es: {{ apellidos }}</p>
-</ng-template>
+<div class="center">
+  <section id="content">
+    <h2 class="sub-header">Pagina de pruebas</h2>
 
-<ng-template #noHayParametros>
-  <p>No hay nombre con apellidos por mostrar</p>
-</ng-template>
-
-<button (click)="redireccion()">Ponme nombre y apellidos</button>
-<hr />
+    <div
+      *ngIf="nombre && apellidos; then siHayParametros; else noHayParametros"
+    ></div>
+    
+    <ng-template #siHayParametros>
+      <p>El nombre es: {{ nombre }}</p>
+      <p>El apellido es: {{ apellidos }}</p>
+    </ng-template>
+    
+    <ng-template #noHayParametros>
+      <p>No hay nombre con apellidos por mostrar</p>
+    </ng-template>
+    
+    <button (click)="redireccion()">Ponme nombre y apellidos</button>
+    <hr />
+    
+  </section>
+  <app-sidebar></app-sidebar>
+</div>
