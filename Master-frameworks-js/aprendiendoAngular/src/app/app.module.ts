@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { appRoutingProviders, routing } from './app.routing';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MiComponente } from './components/mi-componente/mi-componente.component';
@@ -34,11 +35,12 @@ import { EsParPipe } from './pipes/espar.pipe';
     PaginaComponent,
     ErrorComponent,
     PeliculaComponent,
-    EsParPipe
+    EsParPipe,
   ],
   imports: [
     BrowserModule,
-    routing
+    routing,
+    FormsModule,
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

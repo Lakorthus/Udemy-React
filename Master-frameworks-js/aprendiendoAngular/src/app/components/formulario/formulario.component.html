@@ -3,24 +3,30 @@
 <div class="center">
   <section id="content">
     <h1 class="sub-header">Formulario</h1>
-    <form class="mid-form">
+   
+    <form class="mid-form" #userForm="ngForm" (ngSubmit)="onSubmit()">
+
       <div class="form-group">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" />
+        <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="user.nombre"/>
       </div>
+
       <div class="form-group">
         <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" />
+        <input type="text" name="apellido" #apellidos="ngModel" [(ngModel)]="user.apellidos"/>
       </div>
+
       <div class="form-group">
         <label for="bio">Biografia</label>
-        <textarea name="bio"></textarea>
+        <textarea name="bio" #bio="ngModel" [(ngModel)]="user.bio"></textarea>
       </div>
+
       <div class="form-group radio-buttom">
-        <input type="radio" name="genero" value="hombre" />Hombre
-        <input type="radio" name="genero" value="mujer" />Mujer
-        <input type="radio" name="genero" value="otro" />Otro
+        <input type="radio" name="genero" value="hombre" [(ngModel)]="user.genero" />Hombre
+        <input type="radio" name="genero" value="mujer"  [(ngModel)]="user.genero"/>Mujer
+        <input type="radio" name="genero" value="otro"  [(ngModel)]="user.genero"/>Otro
       </div>
+
       <div class="clearfix"></div>
 
       <input type="submit" value="Enviar" class="btn btn-success" />
